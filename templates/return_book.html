@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Return Book</title>
+</head>
+<body>
+<h1>Return Book</h1>
+
+{% if message %}
+<p>{{ message }}</p>
+{% endif %}
+
+<form method="post">
+    Book ID: <input type="number" name="book_id" required><br>
+    <input type="submit" value="Return Book">
+</form>
+
+<a href="/">Back to Home</a>
+</body>
+</html>

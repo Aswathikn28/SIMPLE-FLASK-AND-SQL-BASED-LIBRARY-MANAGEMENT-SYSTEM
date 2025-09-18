@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Library</title>
+    <style>
+        /* Full-screen background image */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: url('https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=1600&q=80') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        /* Overlay for readability */
+        .overlay {
+            background-color: rgba(0, 0, 0, 0.6);
+            min-height: 100vh;
+            padding: 40px 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 20px 30px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            border-radius: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        a.button {
+            text-decoration: none;
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        a.button:hover {
+            background-color: #45a049;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .status-available {
+            color: #155724;
+            background-color: #d4edda;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .status-borrowed {
+            color: #721c24;
+            background-color: #f8d7da;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .action-link {
+            text-decoration: none;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .borrow {
+            background-color: #28a745;
+        }
+
+        .borrow:hover {
+            background-color: #218838;
+        }
+
+        .return {
+            background-color: #dc3545;
+        }
+
+        .return:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+<div class="overlay">
+    <div class="container">
+        <h1>Library Books</h1>
+        <a class="button" href="/add_book">Add Book</a>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            {% for book in books %}
+            <tr>
+                <td>{{ book.book_id }}</td>
+                <td>{{ book.title }}</td>
+                <td>{{ book.author }}</td>
+                <td>
+                    {% if book.available %}
+                        <span class="status-available">Available</span>
+                    {% else %}
+                        <span class="status-borrowed">Borrowed</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if book.available %}
+                        <a class="action-link borrow" href="/borrow/{{ book.book_id }}">Borrow</a>
+                    {% else %}
+                        <a class="action-link return" href="/return/{{ book.book_id }}">Return</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+</body>
+</html>
